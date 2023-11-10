@@ -1,0 +1,13 @@
+a{
+    text-decoration: none;
+}
+
+.card{
+    width: 18rem;
+}
+
+.card>img{
+    min-height: 25rem;
+    height:25vw;
+    object-fit: cover;
+}

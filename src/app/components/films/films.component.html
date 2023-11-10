@@ -1,0 +1,71 @@
+<div class="input-group">
+    <input #filterByTitle id="filterByTitle" type="search" placeholder="Search film..." class="form-control" aria-describedby="searchBtn" (input)="onFilterParameter(filterByTitle)">
+    <button class="btn btn-outline-secondary disabled" type="button" id="searchBtn" (click)="onFilterParameter(filterByTitle)">Search</button>
+</div>
+<!-- <div class="row mt-5 mb-5 d-flex justify-content-center"> -->
+<div class="row mt-5 mb-5 justify-content-center">
+        <div class="col-md-2 mb-5">
+            <div class="mb-2" *ngIf="isThereParameters">
+                <p class="text-muted m-0" *ngIf="isYearParam">
+                    Year: {{filterByYearFROM.value}}~{{filterByYearTO.value}}
+                </p>
+                <p class="text-muted m-0" *ngIf="isCountryParam">
+                    Country: {{filterByCountry.value}}
+                </p>
+                <p class="text-muted m-0" *ngIf="isDirectorParam">
+                    Director: {{filterByDirector.value}}
+                </p>
+            </div>
+            <ul class="list-group">
+
+                <a data-bs-toggle="collapse" href="#byYear" aria-controls="byYear" aria-expanded="true">
+                    <li class="list-group-item dropdown-toggle">Year</li>
+                </a>
+                <div class="collapse" id="byYear">
+                    <label for="filterByYearFROM">from</label>
+                    <input
+                      #filterByYearFROM
+                      (input)="onFilterParameter(filterByYearFROM)"
+                      type="number"
+                      id="filterByYearFROM"
+                      class="form-control form-control-sm"
+                      min="1893">
+
+                    <label for="filterByYearTO">to</label>
+                    <input #filterByYearTO (input)="onFilterParameter(filterByYearTO)" type="number" id="filterByYearTO" class="form-control form-control-sm" min="1893">
+                    <br>
+                </div>
+
+                <a data-bs-toggle="collapse" href="#byGenre" aria-controls="byGenre" aria-expanded="true">
+                    <li class="list-group-item dropdown-toggle">Genre</li>
+                </a>
+                <div class="collapse" id="byGenre">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item list-group-item-dark">Action</li>
+                        <li class="list-group-item list-group-item-dark">Drama</li>
+                        <li class="list-group-item list-group-item-dark">Horror</li>
+                    </ul>
+                </div>
+
+                <a data-bs-toggle="collapse" href="#byCountry" aria-controls="byCountry" aria-expanded="true">
+                    <li class="list-group-item dropdown-toggle">Country</li>
+                </a>
+                <div class="collapse" id="byCountry">
+                    <input type="search" id="filterByCountry" #filterByCountry (input)="onFilterParameter(filterByCountry)" class="form-control form-control-sm" placeholder="Country of origin...">
+                    <!--if found country from API, show it here as a clickable to add to query-->
+                </div>
+
+                <a data-bs-toggle="collapse" href="#byDirector" aria-controls="byDirector" aria-expanded="true">
+                    <li class="list-group-item dropdown-toggle">Director</li>
+                </a>
+                <div class="collapse" id="byDirector">
+                    <input #filterByDirector (input)="onFilterParameter(filterByDirector)" type="search" id="filterByDirector" class="form-control form-control-sm" placeholder="Director's name...">
+                    <!--if found director in DATABASE, show it here as a clickable to add to query-->
+                </div>
+            </ul>
+        </div>
+        <!-- <div class="col col-10 col-lg-8 d-flex justify-content-center"> -->
+        <div class="col-md-10">
+            <router-outlet></router-outlet>
+        </div>
+    </div>

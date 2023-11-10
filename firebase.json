@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/filmarchive",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

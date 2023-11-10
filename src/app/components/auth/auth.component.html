@@ -1,0 +1,52 @@
+<div class="container form-group" style="width:400px">
+    <app-spinner *ngIf="loading;else elseBlock"></app-spinner>
+    <ng-template #elseBlock>
+        <div class="alert alert-danger" *ngIf="error">{{error}}</div>
+        <form #accountForm="ngForm" (ngSubmit)="onSubmit(accountForm)">
+            <div class="row">
+                <div class="col">
+                    <label for="email">E-MAIL</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      class="form-control"
+                      [(ngModel)]="formUsername.email"
+                      required
+                      #email="ngModel">
+                </div>
+            </div>
+            <div class="alert alert-warning mt-2" *ngIf="!email.valid && email.touched; else elseBlock">E-mail field is required.</div>
+            <ng-template #elseBlock>
+                <br>
+            </ng-template>
+            <div class="row">
+                <div class="col">
+                    <label for="password">PASSWORD</label>
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      class="form-control"
+                      [(ngModel)]="formUsername.password"
+                      required
+                      #password="ngModel">
+                </div>
+            </div>
+            <div class="alert alert-warning mt-2" *ngIf="!password.valid && password.touched; else elseBlock">Password field is required.</div>
+            <ng-template #elseBlock>
+                <br>
+            </ng-template>
+            <div class="row m-0">
+                <div class="col p-0 d-flex justify-content-between">
+                    <button
+                      class="btn btn-primary"
+                      type="button"
+                      [disabled]="!accountForm.valid"
+                      (click)="onSubmit(accountForm)">{{logIn ? 'LOG IN' : 'SIGN UP'}}</button>
+                    <button class="btn btn-secondary" type="button" (click)="onSwitchMode()">{{!logIn ? 'LOG IN' : 'SIGN UP'}}?</button>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+</div>

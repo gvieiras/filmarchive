@@ -1,0 +1,36 @@
+<h1 class="text-center">{{"rate, log & talk about your favorite films."}}</h1>
+<div class="container-sm mt-5 text-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col col-md-4 col-lg-3">
+        <button [routerLink]="['/login']" class="btn btn-outline-light text-nowrap" [class.disabled]="alreadyLogged" type="button">CREATE ACCOUNT</button>
+      </div>
+      <div class="col col-md-4 col-lg-3">
+        <button [routerLink]="['/films']" class="btn btn-outline-light text-nowrap" type="button">SEARCH FOR FILMS</button>
+      </div>
+    </div>
+  </div>
+</div>
+<h3 class="text-body-secondary mt-5 text-center">{{"most popular films" | uppercase}}</h3>
+
+<div class="container mb-5 mt-4 d-flex justify-content-center px-4">
+  <app-spinner *ngIf="loading"></app-spinner>
+  <div class="row gx-1" *ngIf="!loading">
+    <div class="col d-flex justify-content-center col-lg-3 mt-2" *ngFor="let film of popularFilms | slice:0:4; let i = index">
+      <div class="card">
+        <a [routerLink]="['/films/',film.id]">
+          <img src="{{film.posterImg}}" class="card-img-top" alt="{{film.title}} poster">
+        </a>
+        <div class="card-body">
+          <h4 class="card-title">{{film.title | uppercase}}</h4>
+          <small>{{(film.plot.length>200) ? (film.plot | slice:0:200)+'...' : film.plot}}</small>
+        </div>
+        <div class="card-footer text-body-secondary">
+          <small class="text-muted">
+            {{film.directorName}}, {{film.yearReleased}}, {{film.countryIssued.name}}
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

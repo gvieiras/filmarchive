@@ -1,0 +1,38 @@
+<div class="container text-center" *ngIf="loading">
+    <app-spinner ></app-spinner>
+</div>
+<div class="container p-0" *ngIf="!loading">
+    <div class="row row-cols-3 row-cols-md-6 g-0">
+
+        <div class="col" *ngFor="let film of films | async">
+        <!-- <div class="col-4 col-md-2 p-0" *ngFor="let film of films | slice:filmListMin:filmListMax"> -->
+            <a [routerLink]="[film.id]" style="cursor: pointer;" id="poster" title="{{film.title}}">
+                <img src="{{film.posterImg}}" alt="{{film.title}}'s poster" class="img-thumbnail">
+            </a>
+        </div>
+
+    </div>
+</div>
+<div *ngIf="!loading" class="container d-flex justify-content-center mt-3">
+    <nav aria-label="film list pagination">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" [class.disabled]="filmListMin === 0 || disablePagination" 
+                (click)="onChangePage('prev')">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item" *ngFor="let n of paginationLinks; let i = index">
+                <a class="page-link" (click)="onChangePagination(i+1)"
+                [class.active]="page === i+1" [class.disabled]="disablePagination">{{i+1}}</a>
+            </li>
+    
+            <li class="page-item">
+                <a class="page-link" [class.disabled]="totalFilmsShown || disablePagination" 
+                (click)="onChangePage('next')">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

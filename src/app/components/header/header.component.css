@@ -1,0 +1,13 @@
+a{
+    cursor: pointer;
+}
+
+.dropdown-menu{
+    min-width: 4rem;
+}
+
+.dropdown-menu>a{
+    word-wrap: break-word;
+    width:100px;
+    white-space:normal;
+}

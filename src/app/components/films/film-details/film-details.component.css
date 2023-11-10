@@ -1,0 +1,19 @@
+img{
+    width:20rem;
+}
+
+@media(min-width:992px){
+    img{
+        width: 50rem;
+    }
+}
+
+@media(max-width:768px){
+    .display-5, .card-body>p{
+        text-align: center;
+    }
+
+    .plot{
+        text-align: start!important;
+    }
+}

@@ -1,0 +1,18 @@
+@media(max-width:768px){
+    button{
+        margin:1rem 0;
+    }
+}
+
+input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched, select.ng-invalid.ng-touched{
+    border: 3px solid orange;
+}
+
+.genreBox{
+    overflow: scroll;
+    padding: 0px 15px 15px 15px;
+}
+
+.shortTextButton{
+    font-size: 80%;
+}

@@ -1,0 +1,33 @@
+img{
+    height:15rem;
+    min-height: 10rem;
+    width:100%;
+    object-fit: cover;
+}
+
+.custom-tooltip {
+    --bs-tooltip-bg: #000;
+}
+
+.page-item{
+    cursor: pointer;
+}
+
+.page-item-disabled{
+    cursor: not-allowed;
+}
+
+/* .caption {
+    position: absolute;
+    top: 25%;
+    left: 0;
+    width: 100%;
+}
+
+.caption>p{
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.thumbnail {
+    position: relative;
+} */
