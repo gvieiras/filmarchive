@@ -1,6 +1,8 @@
 # filmarchive
 Single page angular app for archiving films using firestore as database
 
+https://filmarchive-d81af.web.app/
+
 ## features
 1. complete CRUD for admin users;
 2. rating and film scores;
