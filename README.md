@@ -1,11 +1,11 @@
 # filmarchive
-Single page angular app for archiving films, using Firestore's database
+Single page angular app for archiving films using firestore as database
 
 ## features
-complete CRUD for admin users;
-rating and film scores;
-search parameter year of release range, director name and country of origin name;
+1. complete CRUD for admin users;
+2. rating and film scores;
+3. searching and filtering films by year of release range, director name and country of origin name;
 
 ### TODO
-search by genre;
-integration of search-friendly database for more complex search parameter queries;
+1. search by genre;
+2. integration of search-friendly database for more complex search parameter queries;
