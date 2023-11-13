@@ -10,4 +10,5 @@ https://filmarchive-d81af.web.app/
 4. authentication;
 
 ### TODO
+1. search by genre;
 2. integration of search-friendly database for more complex search parameter queries;
