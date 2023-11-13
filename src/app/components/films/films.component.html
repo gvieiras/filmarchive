@@ -41,9 +41,12 @@
                 </a>
                 <div class="collapse" id="byGenre">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item list-group-item-dark">Action</li>
-                        <li class="list-group-item list-group-item-dark">Drama</li>
-                        <li class="list-group-item list-group-item-dark">Horror</li>
+                        <li class="list-group-item list-group-item-dark">
+                           <button
+                              class="btn btn-outline-success btn-sm"
+                              #genreButton
+                              *ngFor="let genre of genres" (click)="genreButton.classList.toggle('active'); onSelectedGenre(genre)">{{genre}}</button>
+                        </li>
                     </ul>
                 </div>
 

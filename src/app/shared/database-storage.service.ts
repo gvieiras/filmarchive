@@ -1,4 +1,4 @@
-import { Firestore, collection, collectionData, doc, runTransaction, query, where, orderBy, arrayUnion, increment, arrayRemove, QueryConstraint, limit, WhereFilterOp, getCountFromServer, setDoc, deleteDoc} from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, runTransaction, query, where, orderBy, arrayUnion, increment, arrayRemove, QueryConstraint, limit, WhereFilterOp, getCountFromServer, setDoc, deleteDoc, or} from '@angular/fire/firestore';
 import { Film } from '../components/films/film.model';
 import { Injectable, inject } from '@angular/core';
 import { Observable, Subject, Subscription, last, map } from "rxjs";
@@ -43,10 +43,10 @@ export class DatabaseStorageService{
     queryConditions:QueryConstraint[] = [];
     queryExists = new Subject<boolean>;
 
-    changeFilter(filter:{id:string,value:string}[]){   
+    changeFilter(filter:{id:string,value:string|string[]}[]){   
         this.queryConditions = filter.map(f=>{
             let operator:WhereFilterOp = "==";
-            let value:string|number = "";
+            let value:string|number|string[] = "";
             let filter = {...f};
             switch(filter.id){
                 case "filterByYearFROM":
@@ -62,23 +62,30 @@ export class DatabaseStorageService{
                 case "filterByTitle":
                     filter.id = "title_lowercase";
                     operator = "==";
-                    value = filter.value.toLowerCase();
+                    value = filter.value.toString().toLowerCase();
                 break;
                 case "filterByDirector":
                     filter.id = "directorName_lowercase";
                     operator = "==";
-                    value = filter.value.toLowerCase();
+                    value = filter.value.toString().toLowerCase();
                 break;
                 case "filterByCountry":
                     filter.id = "countryName_lowercase";
                     operator = "==";
-                    value = filter.value.toLowerCase();
+                    value = filter.value.toString().toLowerCase();
+                break;
+                case "filterByGenre":
+                    filter.id = "genres";
+                    operator = "array-contains-any"
+                    value = filter.value;
                 break;
             }
             return where(filter.id,operator,value);
         });
         
         this.queryExists.next(this.queryConditions.length !== 0);
+
+        console.log(this.queryConditions);
 
         if(this.queryConditions.length === 0){
             this.getFilms();
