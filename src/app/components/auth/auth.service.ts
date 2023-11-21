@@ -62,6 +62,8 @@ export class AuthService{
         await this.authDb.getUserFromDb(localId).then(f=>userFilms = f!['films']).catch((e)=>{
             if(isDevMode()){
                 console.log(e);
+            }else{
+                console.log("User has no films.")
             }
         });
 
@@ -73,6 +75,8 @@ export class AuthService{
         await this.authDb.getUserFromDb(localId).then(d=>{authUser.admin = d!['admin']}).catch((e)=>{
             if(isDevMode()){
                 console.log(e);
+            }else{
+                console.log("Welcome "+email);
             }
         });
 
