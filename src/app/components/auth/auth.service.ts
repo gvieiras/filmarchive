@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Injectable, OnInit } from "@angular/core";
+import { Injectable, OnInit, isDevMode } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { catchError, tap, throwError, BehaviorSubject, delayWhen, from } from "rxjs"
 import { Router } from "@angular/router";
@@ -59,14 +59,22 @@ export class AuthService{
 
     async handleAuth(email: string, localId:string, idToken: string, expiresIn:number){
         let userFilms;
-        await this.authDb.getUserFromDb(localId).then(f=>userFilms = f!['films']);
+        await this.authDb.getUserFromDb(localId).then(f=>userFilms = f!['films']).catch((e)=>{
+            if(isDevMode()){
+                console.log(e);
+            }
+        });
 
         const expirationDate = new Date(new Date().getTime() + (expiresIn * 1000));
         console.log("token expires in:"+expirationDate);
         const authUser = new User(email, localId, idToken, expirationDate);
         authUser.films = userFilms;
 
-        await this.authDb.getUserFromDb(localId).then(d=>{authUser.admin = d!['admin']});
+        await this.authDb.getUserFromDb(localId).then(d=>{authUser.admin = d!['admin']}).catch((e)=>{
+            if(isDevMode()){
+                console.log(e);
+            }
+        });
 
         this.user.next(authUser);
         this.autoLogout(expiresIn * 1000);
